@@ -8,12 +8,12 @@
      (with-out-str (print v)))
 
 (defn pop-n [coll n] 
-  (loop [popped ()
+  (loop [popped []
          coll coll
          n n]
     (if (or (empty? coll) (= n 0)) 
         [popped coll]
-        (recur (conj popped (first coll)) (rest coll) (dec n)))))
+        (recur (conj popped (peek coll)) (pop coll) (dec n)))))
 
 (defn push-operand [stack val]
   (conj stack val))
@@ -22,13 +22,13 @@
   (let [[args stack] (pop-n stack arity)]
     (if (= (count args) arity)
         (conj stack (apply op args)) 
-        ())))
+        [])))
 
 
 ;;; state/UI
 
 
-(def *stack* (atom '()))
+(def *stack* (atom []))
 
 (def frame (ss/frame :title "Calc"))
 
@@ -36,7 +36,7 @@
 
 (add-watch *stack* :_
            (fn [key ref old new]
-               (ss/text! result (to-string (reverse new)))))
+               (ss/text! result (to-string new))))
 
 (defn operand-button [val]
   (ssa/action :name val
