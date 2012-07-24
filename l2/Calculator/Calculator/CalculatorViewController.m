@@ -47,4 +47,11 @@
     self.display.text = resultString;
 }
 
+- (IBAction)dotPressed {
+    BOOL containsDot =
+        [[NSPredicate predicateWithFormat:@"SELF CONTAINS '.'"]
+         evaluateWithObject:self.display.text];
+    if (!containsDot)
+        self.display.text = [self.display.text stringByAppendingString:@"."];
+}
 @end
