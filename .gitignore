@@ -1,6 +1,10 @@
 pom.xml
+*swp
 *jar
 /lib/
-/classes/
+classes/
 .lein-failures
 .lein-deps-sum
+project.xcworkspace/
+xcuserdata/
+.DS_store
