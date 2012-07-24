@@ -51,7 +51,9 @@
     BOOL containsDot =
         [[NSPredicate predicateWithFormat:@"SELF CONTAINS '.'"]
          evaluateWithObject:self.display.text];
-    if (!containsDot)
+    if (!containsDot) {
         self.display.text = [self.display.text stringByAppendingString:@"."];
+        self.userIsInTheMiddleOfEnteringANumber = YES;
+    }
 }
 @end
