@@ -30,6 +30,10 @@
     return [CalculatorBrain runProgram:self.program];
 }
 
+- (void)clear {
+    self.programStack = nil;
+}
+
 - (id)program {
     return [self.programStack copy];
 }

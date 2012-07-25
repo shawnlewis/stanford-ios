@@ -56,4 +56,11 @@
         self.userIsInTheMiddleOfEnteringANumber = YES;
     }
 }
+
+- (IBAction)clearPressed {
+    [self.brain clear];
+    self.display.text = @"0";
+    self.userIsInTheMiddleOfEnteringANumber = NO;
+}
+
 @end
