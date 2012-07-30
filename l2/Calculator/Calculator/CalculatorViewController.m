@@ -75,4 +75,10 @@
     [self setProgram:nil];
     [super viewDidUnload];
 }
+
+- (IBAction)variablePressed:(UIButton *)sender {
+    [self.brain pushVariable:sender.currentTitle];
+    [self updateProgram];
+}
+
 @end
