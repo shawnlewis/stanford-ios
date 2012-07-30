@@ -39,7 +39,7 @@
 }
 
 + (NSString *)descriptionOfProgram:(id)program {
-    return @"Implement me";
+    return [(NSMutableArray *) program description];
 }
 
 + (double)popOperandOffStack:(NSMutableArray *)stack {

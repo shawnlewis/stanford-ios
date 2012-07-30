@@ -16,12 +16,17 @@
 
 @implementation CalculatorViewController
 @synthesize display = _display;
+@synthesize program = _program;
 @synthesize userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber;
 @synthesize brain = _brain;
 
 - (CalculatorBrain *)brain {
     if (!_brain) _brain = [[CalculatorBrain alloc] init];
     return _brain;
+}
+
+- (void)updateProgram {
+    self.program.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
 }
 
 - (IBAction)digitPressed:(UIButton *)sender {
@@ -37,12 +42,14 @@
 
 - (IBAction)enterPressed {
     [self.brain pushOperand:[self.display.text doubleValue]];
+    [self updateProgram];
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
 - (IBAction)operationPressed:(UIButton *)sender {
     if (self.userIsInTheMiddleOfEnteringANumber) [self enterPressed];
     double result = [self.brain performOperation:sender.currentTitle];
+    [self updateProgram];
     NSString *resultString = [NSString stringWithFormat:@"%g", result];
     self.display.text = resultString;
 }
@@ -59,8 +66,13 @@
 
 - (IBAction)clearPressed {
     [self.brain clear];
+    [self updateProgram];
     self.display.text = @"0";
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
+- (void)viewDidUnload {
+    [self setProgram:nil];
+    [super viewDidUnload];
+}
 @end
