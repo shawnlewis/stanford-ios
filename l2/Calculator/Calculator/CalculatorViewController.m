@@ -81,4 +81,21 @@
     [self updateProgram];
 }
 
+- (void)runTest:(NSDictionary *)vars {
+    double result = [[self.brain class] runProgram:self.brain.program
+                               usingVariableValues:vars];
+    self.display.text = [NSString stringWithFormat:@"%g", result];
+}
+
+- (IBAction)test1Pressed {
+    [self runTest:[NSDictionary dictionaryWithObjectsAndKeys:
+                   [NSNumber numberWithDouble:5.3], @"a", nil]];
+}
+
+- (IBAction)test2Pressed:(UIButton *)sender {
+    [self runTest:[NSDictionary dictionaryWithObjectsAndKeys:
+                   [NSNumber numberWithDouble:12.1], @"a",
+                   [NSNumber numberWithDouble:5], @"b", nil]];
+}
+
 @end

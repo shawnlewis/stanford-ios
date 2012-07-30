@@ -90,11 +90,17 @@
 }
 
 + (double)runProgram:(id)program {
+    return [self runProgram:program
+                 usingVariableValues:[NSDictionary dictionary]];
+}
+
++ (double)runProgram:(id)program
+ usingVariableValues:(NSDictionary *)variableValues {
     NSMutableArray *stack;
     if ([program isKindOfClass:[NSArray class]]) {
         stack = [program mutableCopy];
     }
-    return [self popOperandOffStack:stack withVars:[NSDictionary dictionary]];
+    return [self popOperandOffStack:stack withVars:variableValues];
 }
 
 @end
